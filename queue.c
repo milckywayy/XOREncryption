@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+
 #include "queue.h"
 
 
@@ -44,6 +45,7 @@ int add_queue_element(queue_t *queue, char c)
 	}
 
 	queue->elements[queue->size++] = c;
+
 	return 0;
 }
 

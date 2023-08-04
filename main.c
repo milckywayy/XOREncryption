@@ -43,9 +43,6 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	printf("path: %s\n", file_path);
-	printf("key: %s\n", key);
-
 	switch (xor(file_path, key)) 
 	{
 		case 1:

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "queue.h"
 
 
@@ -34,7 +35,6 @@ char * string_to_bin(char *str)
 
 	return result;
 }
-
 
 int xor(char *file_path, char *key)
 {
