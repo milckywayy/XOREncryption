@@ -54,7 +54,7 @@ char get_queue_element(queue_t *queue)
 
 	if (queue->size < 1)
 	{
-		return 1;
+		return '\0';
 	}
 
 	element = queue->elements[0];

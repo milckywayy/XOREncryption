@@ -56,12 +56,15 @@ int xor(char *file_path, char *key)
 
 	if (init_queue(&(queue), 8) == 1)
 	{
+		free(key_bin);
 		return 1;
 	}
 
 	file = fopen(file_path, "r");
 	if (file == NULL)
 	{
+		free(key_bin);
+		free_queue(&(queue));
 		return 2;
 	}
 
@@ -77,13 +80,31 @@ int xor(char *file_path, char *key)
 
 			byte |= (((c & (1 << (7 - i))) >> (7 - i)) ^ ((key_bin[key_shift++]) - '0')) << (7 - i);
 		}
-		add_queue_element(&(queue), byte);
+		if (add_queue_element(&(queue), byte) == 1)
+		{
+			fclose(file);
+			free(key_bin);
+			free_queue(&(queue));
+			return 1;
+		}
 	}
 
-	print_queue(&(queue));
-
-	
 	fclose(file);
+	
+	file = fopen(file_path, "w");
+	if (file == NULL)
+	{
+		free(key_bin);
+		free_queue(&(queue));
+		return 3;
+	}
+
+	while (queue.size > 0)
+	{
+		fprintf(file, "%c", get_queue_element(&(queue)));
+	}
+	fclose(file);
+	
 	free(key_bin);
 	free_queue(&(queue));
 
