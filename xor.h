@@ -1,0 +1,3 @@
+
+int xor(char*, char*);
+
