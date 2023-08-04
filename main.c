@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 	if (file_path == NULL || key == NULL)
 	{
 		fprintf(stderr, "Empty argument.\n");
-		return 2;
+		return 1;
 	}
 
 	printf("path: %s\n", file_path);
@@ -49,9 +49,12 @@ int main(int argc, char **argv)
 	switch (xor(file_path, key)) 
 	{
 		case 1:
+			fprintf(stderr, "Memory error.\n");
+			return 2;
+		case 2:
 			fprintf(stderr, "Couldn't read %s file.\n", file_path);
 			return 3;
-		case 2:
+		case 3:
 			fprintf(stderr, "Couldn't write to %s file.\n", file_path);
 			return 4;
 	}
